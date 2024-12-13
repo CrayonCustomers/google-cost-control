@@ -34,7 +34,7 @@ If you haven't enabled the Cloud Billing export to BigQuery, [follow this link](
 ### 1. Select a Project
 Choose the project where Cloud Billing export to BigQuery has been enabled. Ensure it is selected at the top of the Google Cloud Console. 
 
-   ![Selet Project](images\select_project.png)
+   ![Selet Project](images/select_project.png)
 
 ### 2. Creating Custom Roles
 **Two custom roles** are required: one for project-level permissions and another for BigQuery-level access. The project-level role tailors permissions to specific project needs, while the BigQuery-level role ensures precise access controls within the BigQuery environment.
@@ -42,11 +42,11 @@ Choose the project where Cloud Billing export to BigQuery has been enabled. Ensu
    #### 2.1 Project-Level Role
    1. Navigate to **IAM & Admin > Roles** in the Google Cloud Console.
 
-      ![IAM Roles](images\iam_roles.png)
+      ![IAM Roles](images/iam_roles.png)
 
    2. Click **+ CREATE ROLE** to create a new custom role.
 
-      ![Create Roles](images\create_role.png)
+      ![Create Roles](images/create_role.png)
    3. Enter the following details:
       - **Title**: `Crayon FinOps GCP Project-Level Reader`
       - **ID**: `CrayonFinOpsGCPProjectLevelReader`
@@ -54,7 +54,7 @@ Choose the project where Cloud Billing export to BigQuery has been enabled. Ensu
       - **Role launch stage**: Set to "General Availability".
       - Click **+ ADD PERMISSIONS** and add the following permissions:
 
-         ![Add Permissions](images\project_level_add_permission.png)
+         ![Add Permissions](images/project_level_add_permission.png)
 
       - Use the permissions filter or browse the list to select permissions to add to the role.
          - `bigquery.readsessions.create`
@@ -63,14 +63,14 @@ Choose the project where Cloud Billing export to BigQuery has been enabled. Ensu
          - `resourcemanager.projects.get`
          - `bigquery.jobs.create`
 
-            ![Permissions](images\project-level-role-permission.png)
+            ![Permissions](images/project-level-role-permission.png)
 
          Continue selecting permissions. After selecting all five (5) permissions, click **"ADD"**.
       - Click **"SHOW ADDED AND REMOVED PERMISSIONS"** (in red) to review and confirm the added permissions.
 
-         ![Added Permissions](images\show_added_permissions.png)
+         ![Added Permissions](images/show_added_permissions.png)
          
-         ![List Permissions](images\project_level_list_permissions_create.png)
+         ![List Permissions](images/project_level_list_permissions_create.png)
 
       - Click **Create** to finalize the role creation.
 
@@ -106,41 +106,41 @@ This section outlines the steps to create a service account, assign it a custom 
    1. Verify that you are in the correct project at the top of the GCP console.
    2. Navigate to **IAM & Admin**.
 
-      ![IAM](images\iam.png)
+      ![IAM](images/iam.png)
       
    3. In the **"IAM & Admin"** section, click on **"Service Accounts"**.  Click the **"CREATE SERVICE ACCOUNT"** button at the top of the page.
 
-      ![Create Service Account](images\create_service_account.png)
+      ![Create Service Account](images/create_service_account.png)
 
    4. Enter Service Account Details.
       - Enter the service account name, e.g., **"Crayon FinOps GCP CUR"**.  
       *(The service account ID and email are generated automatically based on the name.)*  
       - Click **"CREATE AND CONTINUE"** to proceed.
 
-         ![Service Account Details](images\service_account_details.png)
+         ![Service Account Details](images/service_account_details.png)
 
    5. **Assign a Role to the Service Account.**
       - Under the **"Grant this service account access to project"** section, click the role selection dropdown.  
       - Select the custom role you created earlier, e.g., **"Crayon FinOps GCP Project-Level Reader"**.
 
-         ![Service Account Access](images\service_acccount_grant_access.png)
+         ![Service Account Access](images/service_acccount_grant_access.png)
 
    6. Click **"CONTINUE"** and then **"DONE"** to complete the service account creation.
       
-         ![Service Account Creation](images\service_account_done.png)
+         ![Service Account Creation](images/service_account_done.png)
 
    7. **Generating a Key for the Service Account.**
 
       After creating the service account, you will be directed to the service account details page.   
       - Navigate to the **"KEYS"** tab.  
       - Click **"ADD KEY"** and select **"Create new key"** from the dropdown menu.  
-         ![Create New Key](images\service_account_create_new_key.png)
+         ![Create New Key](images/service_account_create_new_key.png)
 
       - Select the key type as **JSON** and click **"CREATE"** to generate the new key. A pop-up dialog box will prompt you to save the key file. Store the key file in a secure location and **send it to Crayon** using a secure method.  
-         ![Key Type](images\service_account_key_type_json.png)
+         ![Key Type](images/service_account_key_type_json.png)
 
       - **Verify Key Creation**: The newly created key will appear in the **"Keys"** list with a status of **"Active"**.  
-         ![Key Status](images\service_account_key_status.png)
+         ![Key Status](images/service_account_key_status.png)
 
 ### 4. Assigning a Custom Role to a BigQuery Cloud Billing Dataset  
    Ensure you are in the correct project by checking the project name at the top of the GCP console.  
@@ -149,29 +149,29 @@ This section outlines the steps to create a service account, assign it a custom 
       - Click the navigation menu (three horizontal lines) in the top-left corner of the GCP console.  
       - Scroll down to the **"BigQuery"** section and expand it.  
       - Click on **"BigQuery Studio"** to open the BigQuery interface.  
-      ![Big Query](images\big_query.png)
+      ![Big Query](images/big_query.png)
 
    2. **Locate the Cloud Billing Dataset**  
       - In the **Explorer** pane, locate the Cloud Billing dataset to which permissions need to be assigned.  
-      ![Select Cloud Billing Dataset](images\big_query_select_cloud_billing_dataset.png)
+      ![Select Cloud Billing Dataset](images/big_query_select_cloud_billing_dataset.png)
 
    3. **Assigning a Role**  
       - With the Cloud Billing dataset selected, click on **"SHARING"**. and from the dropdown, select **"Permissions"**.  
-         ![Permission Dropdown](images\big_query_permission_dropdown.png)
+         ![Permission Dropdown](images/big_query_permission_dropdown.png)
 
       - Click the **"ADD PRINCIPAL"** button to start adding a new principal (e.g., a user or service account).  
-         ![Big Query Add Permission](images\big_query_add_permission.png)
+         ![Big Query Add Permission](images/big_query_add_permission.png)
      
       - Enter the service account email created earlier, e.g., `crayon-finops-gcp-cur@...iam.gserviceaccount.com`.  
       - Click **"Assign roles"** to define the permissions for the service account.  
       - Select the custom role you created earlier (e.g., **"Crayon FinOps GCP Cost-and-Usage Reader"**) from the dropdown menu.  
-         ![Big Query Grant Role](images\big_query_grant_custom_role.png)
+         ![Big Query Grant Role](images/big_query_grant_custom_role.png)
 
       - Click **"SAVE"** to apply the role to the service account for this dataset.  
-         ![Big Query Save Access](images\big_query_save_grant_access.png)
+         ![Big Query Save Access](images/big_query_save_grant_access.png)
       
       - Review the list of permissions to confirm that the service account has been assigned the custom role, indicated by the presence of the service account's email and the custom role name in the permissions list as shown below:  
-         ![Confirm Role Assigment](images\big_query_confirm_role_assignment.png)
+         ![Confirm Role Assigment](images/big_query_confirm_role_assignment.png)
 
 
 ### 5. Enable the Recommender API
@@ -180,31 +180,31 @@ This section outlines the steps to create a service account, assign it a custom 
       - Click the navigation menu (three horizontal lines) in the top-left corner of the GCP console.
       - Locate and click on **"APIs & Services"** to expand the section.
       - Select **“Enabled API & Services”** to view all currently enabled APIs for your project.   
-         ![Enable API & Services](images\recommendation_enable_api.png)
+         ![Enable API & Services](images/recommendation_enable_api.png)
 
    2. **Enable New API**  
       - In the **"APIs & Services"** dashboard, click the **"+ENABLE APIS AND SERVICES"** button to add new services.  
-         ![Enable Recommendaiton API](images\recommendation_enable_api_services.png)
+         ![Enable Recommendaiton API](images/recommendation_enable_api_services.png)
 
       - In the API Library, use the search box to find the **"Recommender API"**.   
-         ![Recommendation Search](images\recommendation_search.png)
+         ![Recommendation Search](images/recommendation_search.png)
 
       - From the search results, select **"Recommender API"** to enable it.   
-         ![Select Recommender Api](images\recommendation_select_recommender_api.png)
+         ![Select Recommender Api](images/recommendation_select_recommender_api.png)
 
       - On the **"Product details"** page for the Recommender API, confirm that the API is enabled for your project.  
       - The status will show **"API Enabled"** with a checkmark. If it shows an **"Enabled"** button instead, click the button to enable the API.  
-         ![Recommendation Api Enable](images\recommendation_api_enable.png)
+         ![Recommendation Api Enable](images/recommendation_api_enable.png)
 
 
 ### 6. Assign a Service Account Viewer and Recommendation Viewer Access
 
    - Navigate to **IAM & Admin > Manage Resources** to access the page for managing projects and folders.   
-      ![Manage Resource](images\iam_manage_resources.png)
+      ![Manage Resource](images/iam_manage_resources.png)
 
    - In the **"Manage Resources"** section, check the box next to the organization you want to manage.  
    - Click the **"ADD PRINCIPAL"** button to add a service account for permission assignment.    
-      ![Add Principal](images\manage_resources_add_principal.png)
+      ![Add Principal](images/manage_resources_add_principal.png)
 
    - In the **"Grant access"** dialog:  
      - Enter the email of the service account created earlier (e.g., `crayon-finops-gcp-cur@...iam.gserviceaccount.com`) in the **New Principals** section.  
@@ -212,20 +212,20 @@ This section outlines the steps to create a service account, assign it a custom 
        - **Recommender Viewer**  
        - **Viewer**  
        - **Recommender Exporter**   
-         ![Assign view role](images\manage_resources_view_role.png)
+         ![Assign view role](images/manage_resources_view_role.png)
       
       - Click **"SAVE"** to apply the new permissions to the service account.  
       - Confirm that the service account is listed under the **"Recommender Viewer"**, **"Viewer"**, and **"Recommender Exporter"** roles in the updated list of permissions.  
-         ![Confirm Permission](images\manage_resources_confirm_permission.png)
+         ![Confirm Permission](images/manage_resources_confirm_permission.png)
 
 ### 7. Export Recommendations to BigQuery
 To use the BigQuery Data Transfer Service, ensure you have the **Owner** role for your project.
 
    1. Enable BigQuery Data Transfer Service
       - In the Google Cloud Console, navigate to **APIs & Services > Library**.   
-         ![Library](images\recommendation_enable_api.png)   
+         ![Library](images/recommendation_enable_api.png)   
       - Search for the **BigQuery Data Transfer API**  and click **Enable**.  
-         ![Big Query Data Transfer Enable](images\big_query_data_transfer_api_enable.png) 
+         ![Big Query Data Transfer Enable](images/big_query_data_transfer_api_enable.png) 
 
    2. Required Permissions  
       When setting up the data transfer, you will need specific permissions at both the project and organization levels. You can navigate to the roles in permissions as described in **“Export Cloud Billing data to BigQuery”** section above. 
@@ -253,12 +253,12 @@ To use the BigQuery Data Transfer Service, ensure you have the **Owner** role fo
 
       - Open the **BigQuery Console**, right-click your project name, and select **Create Dataset**.  
       - Follow the prompts to name and configure the dataset. For detailed guidance, refer to **[Creating and Managing Datasets in BigQuery](https://cloud.google.com/bigquery/docs/datasets)**.  
-         ![Big Query Create Dataset](images\big_query_recommendation_create_dataset.png)
+         ![Big Query Create Dataset](images/big_query_recommendation_create_dataset.png)
 
    4. Create a Data Transfer for Recommendations
       To set up a data transfer for exporting recommendations to BigQuery:
       - Open the **Google Cloud Console** and go to **Recommendations Hub > BigQuery Export**.  
-         ![Big Query Recommendation Hub](images\big_query_recommendation_hub.png)
+         ![Big Query Recommendation Hub](images/big_query_recommendation_hub.png)
 
       - Select Destination Project and Enable BigQuery API  
          - Choose the project where the recommendation data should be stored
