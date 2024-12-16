@@ -283,6 +283,11 @@ Once the initial data transfer completes, your dataset will include the followin
 
 ## Final Step
 - **Send JSON Key**: Securely send the generated service account JSON key to [Crayon FinOps Team](mailto:CloudCostControl@crayon.com).  
+- **Organization ID**: The **Google Cloud Organization ID** is a 10-digit identifier for your Google Cloud organization.
+- **Project Name**: The **Project Name** refers to the Google Cloud project where Cloud Billing export to BigQuery is enabled.
+- **Cloud Billing Dataset ID**: The **Cloud Billing Dataset ID** is the name of the BigQuery dataset where Cloud Billing data is stored. In the BigQuery console, under the project that has Cloud Billing export enabled, you can find the dataset listed in the "Explorer" panel on the left-hand side.
+- **Table Name**: The **Table Name** refers to the specific table within the Cloud Billing dataset where the billing data is stored. After navigating to the Cloud Billing dataset in BigQuery, you will see a list of tables. The table storing the billing data will be listed there.
+
 
 
 ## Release Notes
